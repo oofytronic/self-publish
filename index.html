@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Publishing Guide — Two Paths to Print</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #faf8f4;
+    --paper2: #f2efe8;
+    --kdp-dark: #1a3a5c;
+    --kdp-mid: #2e6da4;
+    --kdp-light: #d6e8f7;
+    --kdp-accent: #e8943a;
+    --lulu-dark: #2d1a4a;
+    --lulu-mid: #7b4fa6;
+    --lulu-light: #ecdff7;
+    --lulu-accent: #c45b8a;
+    --warn: #c45b1a;
+    --warn-bg: #fef0e4;
+    --tip-bg: #e8f4ee;
+    --tip: #1a5c3a;
+    --note-bg: #e8eef4;
+    --note: #1a3a5c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
+  }
+  .hero-inner { position: relative; max-width: 860px; margin: 0 auto; }
+  .hero-kicker {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--kdp-accent);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+  .hero-badges {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.02em;
+  }
+
+  /* COMPARISON BAR */
+  .compare-bar {
+    background: var(--paper2);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .compare-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .compare-tab {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .compare-tab:first-child { border-right: 1px solid rgba(0,0,0,0.08); }
+  .compare-tab.active-kdp { background: var(--kdp-dark); }
+  .compare-tab.active-lulu { background: var(--lulu-dark); }
+  .compare-tab .tab-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .kdp-dot { background: var(--kdp-accent); }
+  .lulu-dot { background: var(--lulu-accent); }
+  .tab-label { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .tab-sub { font-size: 11px; color: rgba(0,0,0,0.4); font-weight: 400; }
+  .compare-tab.active-kdp .tab-label,
+  .compare-tab.active-kdp .tab-sub { color: rgba(255,255,255,0.9); }
+  .compare-tab.active-lulu .tab-label,
+  .compare-tab.active-lulu .tab-sub { color: rgba(255,255,255,0.9); }
+  .compare-tab.active-kdp .tab-sub,
+  .compare-tab.active-lulu .tab-sub { color: rgba(255,255,255,0.5); }
+
+  /* CONTENT */
+  .content { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* GUIDE PANELS */
+  .guide { display: none; }
+  .guide.visible { display: block; }
+
+  /* INTRO CARD */
+  .intro-card {
+    margin: 40px 0 48px;
+    padding: 28px 32px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .intro-card.kdp-theme { background: var(--kdp-dark); }
+  .intro-card.lulu-theme { background: var(--lulu-dark); }
+  .intro-stat { }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.5;
+    color: #fff;
+  }
+  .stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .stat-note { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+  /* PHASES */
+  .phases { display: flex; flex-direction: column; gap: 0; }
+
+  .phase {
+    border-left: 2px solid transparent;
+    padding-left: 32px;
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .phase:last-child { padding-bottom: 0; }
+  .phase.kdp-phase { border-color: var(--kdp-mid); }
+  .phase.lulu-phase { border-color: var(--lulu-mid); }
+
+  .phase-node {
+    position: absolute;
+    left: -15px;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .kdp-node { background: var(--kdp-mid); }
+  .lulu-node { background: var(--lulu-mid); }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    margin-top: 2px;
+    color: var(--ink);
+  }
+  .phase-desc {
+    font-size: 13px;
+    color: rgba(0,0,0,0.45);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 12px; }
+
+  .step {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .step-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .step-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .kdp-num { background: var(--kdp-light); color: var(--kdp-dark); }
+  .lulu-num { background: var(--lulu-light); color: var(--lulu-dark); }
+
+  .step-title-text {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .step-chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: rgba(0,0,0,0.25);
+    transition: transform 0.2s;
+  }
+  .step.open .step-chevron { transform: rotate(180deg); }
+
+  .step-body {
+    display: none;
+    padding: 0 20px 18px 56px;
+  }
+  .step.open .step-body { display: block; }
+
+  .step-detail {
+    font-size: 14px;
+    color: rgba(0,0,0,0.65);
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  /* CALLOUTS */
+  .callout {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .callout-text { flex: 1; }
+  .callout-warn { background: var(--warn-bg); color: var(--warn); }
+  .callout-tip { background: var(--tip-bg); color: var(--tip); }
+  .callout-note { background: var(--note-bg); color: var(--note); }
+
+  /* COVER BADGE */
+  .cover-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--warn-bg);
+    color: var(--warn);
+    margin-left: 10px;
+    vertical-align: middle;
+    letter-spacing: 0.02em;
+  }
+
+  /* FOOTER COMPARISON */
+  .bottom-compare {
+    margin-top: 60px;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .bottom-compare h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    background: var(--paper2);
+  }
+  .compare-table { width: 100%; border-collapse: collapse; }
+  .compare-table th {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    text-align: left;
+    color: rgba(0,0,0,0.4);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+  .compare-table th:nth-child(2) { background: rgba(46,109,164,0.06); }
+  .compare-table th:nth-child(3) { background: rgba(123,79,166,0.06); }
+  .compare-table td {
+    padding: 14px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    vertical-align: top;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.7);
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--ink); width: 32%; }
+  .compare-table td:nth-child(2) { background: rgba(46,109,164,0.04); }
+  .compare-table td:nth-child(3) { background: rgba(123,79,166,0.04); }
+  .col-kdp { color: var(--kdp-dark) !important; font-weight: 500 !important; }
+  .col-lulu { color: var(--lulu-dark) !important; font-weight: 500 !important; }
+  .win { display: inline-block; font-size: 11px; background: #e8f4ee; color: #1a5c3a; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-left: 6px; }
+
+  /* HYBRID TIP */
+  .hybrid-tip {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: var(--ink);
+    border-radius: 12px;
+    color: #fff;
+  }
+  .hybrid-tip h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--kdp-accent);
+  }
+  .hybrid-tip p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { padding: 48px 24px 40px; }
+    .intro-card { grid-template-columns: 1fr; }
+    .phase { padding-left: 24px; }
+    .compare-table th:first-child, .compare-table td:first-child { display: none; }
+    .hybrid-tip { padding: 24px 20px; }
+    .bottom-compare h2 { padding: 20px 20px 16px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .guide.visible .phase {
+    animation: fadeUp 0.3s ease both;
+  }
+  .guide.visible .phase:nth-child(1) { animation-delay: 0.05s; }
+  .guide.visible .phase:nth-child(2) { animation-delay: 0.1s; }
+  .guide.visible .phase:nth-child(3) { animation-delay: 0.15s; }
+  .guide.visible .phase:nth-child(4) { animation-delay: 0.2s; }
+  .guide.visible .phase:nth-child(5) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">A step-by-step field guide</div>
+    <h1>Publishing your book,<br><em>your way</em></h1>
+    <p class="hero-sub">Two complete paths to getting your paperback and Kindle eBook into the world — without handing the wheel to anyone else.</p>
+    <div class="hero-badges">
+      <div class="hero-badge">Paperback (KDP)</div>
+      <div class="hero-badge">Kindle eBook</div>
+      <div class="hero-badge">Cover prep included</div>
+      <div class="hero-badge">No third-party services</div>
+    </div>
+  </div>
+</div>
+
+<div class="compare-bar">
+  <div class="compare-inner">
+    <button class="compare-tab active-kdp" id="tab-kdp" onclick="showGuide('kdp')">
+      <div class="tab-dot kdp-dot"></div>
+      <div>
+        <div class="tab-label">Path 1 — DIY on KDP</div>
+        <div class="tab-sub">Direct on Amazon · most control</div>
+      </div>
+    </button>
+    <button class="compare-tab" id="tab-lulu" onclick="showGuide('lulu')">
+      <div class="tab-dot lulu-dot"></div>
+      <div>
+        <div class="tab-label">Path 2 — Lulu</div>
+        <div class="tab-sub">Guided platform · easier setup</div>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- KDP GUIDE -->
+  <div class="guide visible" id="guide-kdp">
+
+    <div class="intro-card kdp-theme">
+      <div class="intro-stat">
+        <div class="stat-label">Cost to publish</div>
+        <div class="stat-val">Free</div>
+        <div class="stat-note">Amazon takes a royalty cut on sales</div>
+      </div>
+      <div class="intro-stat">
+        <div class="stat-label">Royalty (Kindle)</div>
+        <div class="stat-val">70%</div>
+        <div class="stat-note">On eBooks priced $2.99–$9.99</div>
+      </div>
+      <div class="intro-stat">
+        <div class="stat-label">Goes live</div>
+        <div class="stat-val">24–72 hrs</div>
+        <div class="stat-note">After submission & review</div>
+      </div>
+    </div>
+
+    <div class="phases">
+
+      <div class="phase kdp-phase">
+        <div class="phase-node kdp-node">1</div>
+        <div class="phase-title">Set up your KDP account</div>
+        <div class="phase-desc">Before anything else — this takes 10 minutes and you'll need it to save progress.</div>
+        <div class="steps">
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">1</div>
+              <div class="step-title-text">Create or log into KDP at kdp.amazon.com</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Sign in with an existing Amazon account or create one. Complete your tax interview and payment/banking info before doing anything else — KDP requires this before publishing. It asks for your Social Security Number (or EIN if you have a publishing imprint) for tax purposes. Takes about 10 minutes.</p>
+              <div class="callout callout-note">
+                <span class="callout-icon">ⓘ</span>
+                <span class="callout-text">If she already has an Amazon account from her first book, she can use the same KDP login — all previous titles will be there.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase kdp-phase">
+        <div class="phase-node kdp-node">2</div>
+        <div class="phase-title">Format the manuscript</div>
+        <div class="phase-desc">This is done twice — once for the paperback interior, once for Kindle. They're different formats.</div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">1</div>
+              <div class="step-title-text">Choose your trim size first</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">The most common trim sizes for fiction and narrative nonfiction are 5×8", 5.5×8.5", and 6×9". Pick this before formatting — it determines the page size and margins in your Word file, and you don't want to redo it. When in doubt, 5.5×8.5" is a versatile, clean choice for most books.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">2</div>
+              <div class="step-title-text">Format the paperback interior (Word or PDF)</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">KDP accepts a Word .docx or PDF for the interior. Set the page size in Word to match your trim size (File → Page Setup). Set margins to at least 0.5" on all sides — the gutter (spine side) needs a bit more, around 0.75". Use consistent Heading styles for chapter titles so the table of contents works. Remove headers/footers from the first page of each chapter.</p>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text"><strong>Free shortcut:</strong> Download KDP's pre-formatted Word template directly from your KDP dashboard (look under "Paperback resources"). Start by pasting the manuscript into that template instead of formatting from scratch.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">3</div>
+              <div class="step-title-text">Format the Kindle eBook interior (separate step)</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Kindle uses a reflowable format — the reader adjusts font size, so fixed page layouts don't apply. The simplest path: upload a clean Word .docx with proper Heading 1 / Heading 2 styles applied to chapter titles. KDP will convert it automatically into the Kindle format.</p>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text"><strong>For more control:</strong> Download the free Kindle Create app from Amazon. It lets you style and preview the book exactly as it'll look on a Kindle device before uploading.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="phase kdp-phase">
+        <div class="phase-node kdp-node">3</div>
+        <div class="phase-title">Prepare the cover <span class="cover-badge">⚠ Cover size issue — read this</span></div>
+        <div class="phase-desc">The most common stumbling block. There are actually three cover files needed.</div>
+        <div class="steps">
+
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">1</div>
+              <div class="step-title-text">Check and resize the existing front cover art</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">KDP requires the cover image to be at least 1000px on the shortest side and 2500px on the longest, with a 1.6:1 height-to-width ratio — the ideal target is 1600×2560px. It must be 300 DPI for quality print output. Upload as JPG or TIFF.</p>
+              <div class="callout callout-warn">
+                <span class="callout-icon">!</span>
+                <span class="callout-text">Upscaling a low-resolution image to 300 DPI will not fix the quality — it just makes the pixels bigger. Check the source file's actual resolution first. If the original art was created at 72 DPI, it may need to be recreated or professionally upscaled.</span>
+              </div>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text"><strong>Free fix:</strong> Upload the image to Canva (free). Go to Resize, enter 1600×2560px, and download as PDF or PNG. Check that it still looks sharp at that size — if it looks blurry, the source resolution is too low.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">2</div>
+              <div class="step-title-text">Build the full paperback wrap cover (front + spine + back)</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">The paperback needs a full wrap-around cover — front cover, spine, and back cover as a single flat file. The spine width is calculated based on your page count and paper type. Use KDP's free Cover Calculator tool (in the KDP dashboard) to get the exact spine width, then download the blank template PDF. Design the full wrap around that template in Canva, Photoshop, or Affinity Publisher. Export as a PDF with bleed included.</p>
+              <div class="callout callout-note">
+                <span class="callout-icon">ⓘ</span>
+                <span class="callout-text">In Canva, search "KDP book cover" and enter your exact dimensions from the Cover Calculator. Canva's free plan handles this fine. Make sure the spine text (title + author name) is legible — it's easy to make it too small.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">3</div>
+              <div class="step-title-text">Kindle cover (front image only — simpler)</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">For the Kindle listing, you only need the front cover image — no spine or back. The same resized front cover file from Step 1 works perfectly here. Upload as a JPG.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="phase kdp-phase">
+        <div class="phase-node kdp-node">4</div>
+        <div class="phase-title">Upload and fill in book details</div>
+        <div class="phase-desc">You'll do this twice — once for the paperback, once for the Kindle eBook.</div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">1</div>
+              <div class="step-title-text">Start a new paperback title in KDP</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">In your KDP dashboard, click "Create" → "Paperback." Fill in: title, subtitle (if any), series name and number (if applicable), author name, and description. The description is your book's sales pitch on Amazon — write it like back-cover copy. Hook in the first sentence. You also choose up to 7 keywords and 2 BISAC categories (the genre classifications).</p>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text">Keywords matter for discoverability on Amazon. Think about what a reader would type when searching for a book like yours — specific phrases work better than single words.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">2</div>
+              <div class="step-title-text">Decide on the ISBN</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">KDP offers a free ISBN, but it will list "Independently published" as the publisher name. If she wants a custom publisher name — even just a personal imprint name like "Sage River Press" — she'll need to buy her own ISBN from Bowker at myidentifiers.com. Pricing: $125 for one, $295 for 10.</p>
+              <div class="callout callout-note">
+                <span class="callout-icon">ⓘ</span>
+                <span class="callout-text">For most authors, the free KDP ISBN is completely fine. The publisher name is visible on the Amazon page, but most readers don't notice or care. Buying your own ISBN matters more if you're selling through libraries or bookstores.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">3</div>
+              <div class="step-title-text">Upload the files and set pricing</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Upload the interior PDF and the full-wrap cover PDF. KDP will show a live previewer — check it page by page. Then set your list price. KDP shows the minimum price based on printing cost (varies by page count, paper type, and trim size). For royalties: paperback earns 60% minus the printing cost per copy; Kindle eBooks priced $2.99–$9.99 earn 70%.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">4</div>
+              <div class="step-title-text">Repeat for the Kindle eBook</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Go back to "Create" → "Kindle eBook" and repeat the process with the eBook interior file and front cover image. After both are created, link them together — KDP will ask if you want to link the paperback and eBook on the same product page so they share reviews.</p>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text">Always link the paperback and Kindle versions. Shared reviews build social proof faster on a single listing than split across two.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="phase kdp-phase">
+        <div class="phase-node kdp-node">5</div>
+        <div class="phase-title">Review and publish</div>
+        <div class="phase-desc">The final checks before going live.</div>
+        <div class="steps">
+
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">1</div>
+              <div class="step-title-text">Order a physical proof copy — do not skip this</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Before publishing publicly, order an author proof copy. KDP charges only the printing cost (typically $3–7 depending on page count) and ships it to you. Hold the physical book and check: margins on every page, fonts rendering correctly, chapter headers, cover color accuracy, back cover text, and whether the spine text is legible.</p>
+              <div class="callout callout-warn">
+                <span class="callout-icon">!</span>
+                <span class="callout-text">Cover colors almost always print differently than they look on screen. Bright blues tend to go darker; certain reds shift. Check the proof before approving — it's much easier to fix now than after hundreds of copies have sold.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num kdp-num">2</div>
+              <div class="step-title-text">Approve and publish</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Once happy with everything, click "Publish." The paperback will be live on Amazon within 72 hours; the Kindle eBook within 24–48 hours. Both will appear on the same Amazon product page if linked. She'll receive an email confirmation when each goes live.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LULU GUIDE -->
+  <div class="guide" id="guide-lulu">
+
+    <div class="intro-card lulu-theme">
+      <div class="intro-stat">
+        <div class="stat-label">Cost to publish</div>
+        <div class="stat-val">Free</div>
+        <div class="stat-note">Small per-sale platform fee</div>
+      </div>
+      <div class="intro-stat">
+        <div class="stat-label">Amazon listing</div>
+        <div class="stat-val">6–8 weeks</div>
+        <div class="stat-note">Via Lulu's distribution network</div>
+      </div>
+      <div class="intro-stat">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-val">Easier</div>
+        <div class="stat-note">Guided wizard, built-in cover tool</div>
+      </div>
+    </div>
+
+    <div class="phases">
+
+      <div class="phase lulu-phase">
+        <div class="phase-node lulu-node">1</div>
+        <div class="phase-title">Set up a Lulu account</div>
+        <div class="phase-desc">Quick signup — no payment info needed upfront.</div>
+        <div class="steps">
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">1</div>
+              <div class="step-title-text">Create a free account at lulu.com</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Go to lulu.com and sign up. Lulu is free to publish on — you only pay for physical proof copies or if you want premium distribution features. Add payment info when prompted during the setup wizard.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase lulu-phase">
+        <div class="phase-node lulu-node">2</div>
+        <div class="phase-title">Format the manuscript</div>
+        <div class="phase-desc">Similar to KDP, but Lulu provides its own templates — and the eBook path is a bit different.</div>
+        <div class="steps">
+
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">1</div>
+              <div class="step-title-text">Download Lulu's free Word template for your trim size</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Lulu has pre-formatted Word templates for every trim size at lulu.com/create/templates. Download the one matching your chosen size and paste the manuscript into it. Adjust fonts, heading styles, and spacing to taste.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">2</div>
+              <div class="step-title-text">Export to PDF with embedded fonts</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">In Word, go to File → Save As → PDF. Before saving, open "Options" and check "ISO 19005-1 compliant (PDF/A)" or simply ensure "Embed fonts in the file" is checked. This is critical — if fonts aren't embedded, Lulu will either reject the file or the text will render incorrectly.</p>
+              <div class="callout callout-warn">
+                <span class="callout-icon">!</span>
+                <span class="callout-text">This is the single most common upload error on Lulu. Always double-check that fonts are embedded before uploading the PDF.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">3</div>
+              <div class="step-title-text">For the Kindle eBook — use KDP directly instead</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Lulu does offer eBook distribution, but it routes through a third-party aggregator and the royalty cut is noticeably lower than publishing directly on KDP. The popular approach: use Lulu for the paperback, and publish the Kindle version directly on KDP. This is fully allowed as long as she doesn't enroll the Kindle version in KDP Select (which requires exclusivity).</p>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text"><strong>Recommended hybrid:</strong> Lulu for print + KDP direct for Kindle. Best of both worlds — Lulu's easier print workflow and KDP's higher eBook royalties.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="phase lulu-phase">
+        <div class="phase-node lulu-node">3</div>
+        <div class="phase-title">Prepare the cover <span class="cover-badge">⚠ Cover size issue — read this</span></div>
+        <div class="phase-desc">Lulu's built-in cover builder makes this significantly easier than doing it manually.</div>
+        <div class="steps">
+
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">1</div>
+              <div class="step-title-text">Use Lulu's built-in cover builder (recommended)</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Inside the Lulu project wizard, there's a drag-and-drop cover builder. Upload the front cover art as an image and Lulu automatically calculates the spine width and lays out the full wrap. This is the easiest path — no Photoshop or Canva required.</p>
+              <div class="callout callout-tip">
+                <span class="callout-icon">✦</span>
+                <span class="callout-text">This is the biggest advantage Lulu has over KDP — you don't need to manually calculate the spine width or build a full wrap cover from scratch. Lulu handles all of that once you upload the front art.</span>
+              </div>
+              <div class="callout callout-warn">
+                <span class="callout-icon">!</span>
+                <span class="callout-text">The front cover art still needs to be at least 300 DPI. If the current file is a low-resolution JPG (from a web save, for example), it will look blurry in print. Check the source file's actual resolution before uploading.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">2</div>
+              <div class="step-title-text">Or upload a custom full-wrap cover PDF (advanced)</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">If she wants full design control, Lulu has a Cover Template Generator in the project dashboard that outputs the exact dimensions for the full wrap. Design around that template in Canva or Photoshop and upload as a PDF with crop marks and bleed included.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="phase lulu-phase">
+        <div class="phase-node lulu-node">4</div>
+        <div class="phase-title">Set up the project and book details</div>
+        <div class="phase-desc">Lulu's guided wizard walks through each field — nothing is hidden.</div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">1</div>
+              <div class="step-title-text">Start a new print book project</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Click "Create" → "Print Book." The wizard will ask: trim size, paper type (white or cream — cream is traditional for fiction), binding type (perfect bound for paperback), and whether the interior is black & white or color. Choose based on the manuscript's content.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">2</div>
+              <div class="step-title-text">Fill in title, author, and metadata</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Title, author name, book description, genre category. Lulu assigns a free ISBN automatically for distributed books. If she has her own ISBN from Bowker, she can enter it here instead.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">3</div>
+              <div class="step-title-text">Choose distribution</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Lulu's "Global Distribution" option (free to enable) sends the book to Amazon, Barnes & Noble, and other retail channels. However, it takes 6–8 weeks to appear on Amazon this way — much slower than KDP's 72-hour listing. If speed matters, consider publishing the paperback on KDP directly and using Lulu as a separate channel for direct/personal sales.</p>
+              <div class="callout callout-note">
+                <span class="callout-icon">ⓘ</span>
+                <span class="callout-text">Running Lulu and KDP simultaneously for the same paperback is allowed. Just make sure the prices are consistent — Amazon may suppress Lulu's listing if KDP shows a lower price.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">4</div>
+              <div class="step-title-text">Set pricing</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Lulu shows the base printing cost per copy. Set your retail price above that — the difference is your revenue minus Lulu's platform fee. Royalties through Lulu's distribution are generally lower than KDP direct, but the difference matters less for print than for eBooks.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="phase lulu-phase">
+        <div class="phase-node lulu-node">5</div>
+        <div class="phase-title">Review and publish</div>
+        <div class="phase-desc">Lulu's previewer is excellent — use it before ordering a proof.</div>
+        <div class="steps">
+
+          <div class="step open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">1</div>
+              <div class="step-title-text">Preview in Lulu's online 3D previewer</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Lulu renders a 3D preview of the book before any printing happens. Flip through every page in the viewer — check margins, chapter page breaks, fonts, cover wrap alignment, and back cover text. Fix any issues and re-upload before ordering a proof.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">2</div>
+              <div class="step-title-text">Order a physical proof copy</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Order one copy at printing cost. Lulu ships it to you directly. Check everything in hand — cover finish (matte vs glossy), paper weight, interior contrast, spine text legibility, and margins on the outermost pages.</p>
+              <div class="callout callout-warn">
+                <span class="callout-icon">!</span>
+                <span class="callout-text">Don't skip the physical proof. Screens show color differently than ink on paper — and small layout issues (text too close to the edge) only become obvious when you're physically turning pages.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-num lulu-num">3</div>
+              <div class="step-title-text">Approve and enable distribution</div>
+              <svg class="step-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-body">
+              <p class="step-detail">Once the proof looks good, click "Approve" in the Lulu dashboard and enable distribution. The Lulu storefront listing is immediate. Amazon and other retailers via Global Distribution take 6–8 weeks. She'll get email updates as each channel goes live.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="bottom-compare">
+    <h2>Side-by-side comparison</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th><span class="col-kdp">KDP Direct</span></th>
+          <th><span class="col-lulu">Lulu</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cost to publish</td>
+          <td>Free</td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td>Amazon listing speed</td>
+          <td>24–72 hours <span class="win">faster</span></td>
+          <td>6–8 weeks via distribution</td>
+        </tr>
+        <tr>
+          <td>Kindle eBook royalties</td>
+          <td>70% (on $2.99–$9.99) <span class="win">higher</span></td>
+          <td>Lower via Lulu aggregator</td>
+        </tr>
+        <tr>
+          <td>Cover building</td>
+          <td>Manual (Canva / Photoshop)</td>
+          <td>Built-in drag-and-drop tool <span class="win">easier</span></td>
+        </tr>
+        <tr>
+          <td>Cover size issue fix</td>
+          <td>Resize manually in Canva/PS</td>
+          <td>Upload & Lulu auto-calculates</td>
+        </tr>
+        <tr>
+          <td>Difficulty level</td>
+          <td>Moderate — more manual steps</td>
+          <td>Easier — guided wizard <span class="win">simpler</span></td>
+        </tr>
+        <tr>
+          <td>Publisher name on ISBN</td>
+          <td>"Independently published" (free) or custom ($125+)</td>
+          <td>Lulu name or custom ISBN</td>
+        </tr>
+        <tr>
+          <td>Direct storefront</td>
+          <td>Amazon only</td>
+          <td>Lulu shop + Amazon + B&N <span class="win">broader</span></td>
+        </tr>
+        <tr>
+          <td>Best for Kindle eBook?</td>
+          <td>Yes — publish directly <span class="win">recommended</span></td>
+          <td>Skip Lulu — use KDP instead</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- HYBRID TIP -->
+  <div class="hybrid-tip">
+    <h3>The recommended hybrid approach</h3>
+    <p>Many self-published authors do exactly this: <strong style="color:#fff;">use Lulu for the paperback</strong> (easier cover builder, nice direct storefront for selling personally) and <strong style="color:#fff;">publish the Kindle eBook directly on KDP</strong> (70% royalty, goes live in 24 hours). You get the best of both tools without handing anything off to a third party. This is fully permitted — as long as the Kindle version isn't enrolled in KDP Select, there's no exclusivity conflict.</p>
+  </div>
+
+</div>
+
+<script>
+  function toggleStep(header) {
+    const step = header.closest('.step');
+    step.classList.toggle('open');
+  }
+
+  function showGuide(which) {
+    document.querySelectorAll('.guide').forEach(g => g.classList.remove('visible'));
+    document.getElementById('guide-' + which).classList.add('visible');
+    document.getElementById('tab-kdp').className = 'compare-tab' + (which === 'kdp' ? ' active-kdp' : '');
+    document.getElementById('tab-lulu').className = 'compare-tab' + (which === 'lulu' ? ' active-lulu' : '');
+    window.scrollTo({ top: document.querySelector('.compare-bar').offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
