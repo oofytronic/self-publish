@@ -190,7 +190,19 @@ h3 { font-size: 1.5rem; }
 .facts dt { font-family: var(--caps); letter-spacing: .22em; text-transform: uppercase; font-size: .85rem; color: var(--gold); }
 .facts dd { font-size: 1.2rem; }
 
-/* ---------- Praise ---------- */
+/* ---------- Coming soon ---------- */
+.soon-note { margin-top: 1.8rem; font-style: italic; color: var(--muted); font-size: 1.15rem; }
+.soon-note a { text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 1px; }
+.soon-note a:hover { color: var(--wine); }
+.next { display: grid; grid-template-columns: .8fr 1.2fr; gap: 4rem; align-items: center; }
+.next-cover { display: flex; justify-content: center; }
+.book-sm { width: min(260px, 70vw); transform: rotate(2deg); }
+.book-sm .cover-title { font-size: 1.8rem; }
+.book-sm .cover-rose { width: 90px; height: 90px; }
+.next-btn { margin-top: 1.8rem; }
+.next-text .lead + p { margin-top: 1.1rem; }
+
+/* ---------- Praise (unused) ---------- */
 .mini-rose { width: 54px; height: 54px; color: var(--gold); margin: 0 auto 1rem; }
 blockquote { text-align: center; }
 blockquote p { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-style: italic; line-height: 1.4; color: var(--wine-deep); }
@@ -287,9 +299,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-
   .tagline { margin-inline: auto; }
   .cta-row { justify-content: center; }
   .hero-book { order: -1; }
-  .about { grid-template-columns: 1fr; gap: 2.5rem; }
-  .about-text { text-align: center; }
-  .about-text .divider { margin-inline: auto; }
+  .about, .next { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-text, .next-text { text-align: center; }
+  .about-text .divider, .next-text .divider { margin-inline: auto; }
 
   .nav-toggle { display: block; }
   .nav {
