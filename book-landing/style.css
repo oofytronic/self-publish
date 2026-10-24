@@ -209,7 +209,7 @@ blockquote p { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-style: italic; line
 cite { display: block; margin-top: 1.2rem; font-style: normal; font-family: var(--caps); letter-spacing: .24em; text-transform: uppercase; font-size: .95rem; color: var(--muted); }
 
 /* ---------- Buy cards ---------- */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; margin: 1rem auto 0; max-width: 640px; }
 .card {
   display: flex; flex-direction: column; gap: .35rem;
   text-align: center; text-decoration: none;
