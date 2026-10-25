@@ -8,6 +8,8 @@
   --gold: #a98443;
   --gold-soft: #c9ad74;
   --sage: #6f7c62;
+  --forest: #0d1f1b;
+  --forest-2: #1c3a32;
   --serif: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
   --caps: 'Cormorant SC', 'Cormorant Garamond', serif;
 }
@@ -176,8 +178,8 @@ h3 { font-size: 1.5rem; }
   color: var(--ivory);
   background:
     radial-gradient(circle at 50% 38%, rgba(201,173,116,.28), transparent 60%),
-    linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
-  border: 8px solid var(--wine-deep);
+    linear-gradient(160deg, var(--forest-2) 0%, var(--forest) 100%);
+  border: 8px solid var(--forest);
   box-shadow: inset 0 0 0 1px var(--gold);
 }
 .cover-rose { width: 120px; height: 120px; color: var(--gold-soft); }
@@ -235,10 +237,21 @@ cite { display: block; margin-top: 1.2rem; font-style: normal; font-family: var(
   border-radius: 190px 190px 4px 4px;   /* arched, like a niche or window */
   border: 1px solid var(--gold);
   padding: 10px;
-  background: linear-gradient(180deg, #f3e8d0, #e6d6b6);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  text-align: center;
+  color: var(--ivory);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(201,173,116,.22), transparent 60%),
+    linear-gradient(170deg, var(--forest-2), var(--forest));
+  box-shadow: inset 0 0 0 8px var(--ivory), inset 0 0 0 9px var(--gold);
 }
-.portrait-frame img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; border-radius: 180px 180px 2px 2px; }
-.portrait-fallback { position: absolute; inset: 0; margin: auto; width: 55%; height: 55%; color: var(--gold); opacity: .8; }
+.portrait-rose { width: 90px; height: 90px; color: var(--gold-soft); }
+.monogram { font-size: 4.2rem; line-height: 1; letter-spacing: .06em; color: var(--ivory); }
+.monogram i { color: var(--gold-soft); font-weight: 300; padding: 0 .1em; }
+.portrait-caption { font-family: var(--caps); letter-spacing: .24em; text-transform: uppercase; font-size: .85rem; line-height: 1.8; color: var(--gold-soft); }
+.creds { list-style: none; display: grid; gap: 1rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid rgba(169, 132, 67, .5); }
+.creds li { font-size: 1.1rem; color: var(--muted); line-height: 1.4; }
+.creds span { display: block; font-family: var(--caps); letter-spacing: .2em; text-transform: uppercase; font-size: .85rem; color: var(--gold); margin-bottom: .1rem; }
 .link { display: inline-block; margin-top: 1.5rem; font-family: var(--caps); letter-spacing: .2em; text-transform: uppercase; font-size: 1rem; color: var(--wine); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 .link:hover { color: var(--wine-deep); }
 
@@ -250,7 +263,7 @@ cite { display: block; margin-top: 1.2rem; font-style: normal; font-family: var(
 
 /* ---------- Newsletter ---------- */
 .letters {
-  background: linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
+  background: linear-gradient(160deg, var(--forest-2) 0%, var(--forest) 100%);
   color: var(--ivory);
   overflow: hidden;
 }
@@ -270,7 +283,7 @@ cite { display: block; margin-top: 1.2rem; font-style: normal; font-family: var(
 }
 .signup input::placeholder { color: rgba(247, 241, 230, .6); font-style: italic; }
 .signup input:focus { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
-.letters .btn-solid { background: var(--gold); border-color: var(--gold); color: var(--wine-deep); }
+.letters .btn-solid { background: var(--gold); border-color: var(--gold); color: var(--forest); }
 .letters .btn-solid:hover, .letters .btn-solid:focus-visible { background: var(--gold-soft); border-color: var(--gold-soft); }
 .form-msg { min-height: 1.6em; margin-top: 1rem !important; font-style: italic; color: var(--gold-soft); }
 
